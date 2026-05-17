@@ -1,0 +1,92 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "Doc-Qual"
+version = "0.1.0"
+description = "Image quality scoring for OCR readiness"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+authors = [
+  { name = "Pradeep Madhavankutty", email = "pradeep@example.com" }
+]
+keywords = ["ocr", "image-quality", "document", "preprocessing", "computer-vision"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Image Recognition",
+]
+dependencies = [
+  "numpy>=1.21",
+  "opencv-python>=4.5",
+]
+
+[project.optional-dependencies]
+dev = [
+  "black",
+  "build",
+  "isort",
+  "mypy",
+  "pytest",
+  "pytest-cov",
+  "ruff",
+]
+viz = ["matplotlib"]
+docs = [
+  "mkdocs",
+  "mkdocstrings[python]",
+]
+validation = [
+  "matplotlib",
+]
+validation-tesseract = [
+  "pytesseract",
+]
+validation-easyocr = [
+  "easyocr",
+]
+
+[project.scripts]
+doc-qual = "doc_qual.cli:main"
+doc-qual-validate = "scripts.run_validation:main"
+
+[project.urls]
+Homepage = "https://github.com/PradeepMadhavankutty/Doc-Qual"
+Repository = "https://github.com/PradeepMadhavankutty/Doc-Qual"
+Issues = "https://github.com/PradeepMadhavankutty/Doc-Qual/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["doc_qual", "validation"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+"validation/reports/artifacts.py" = ["E501"]
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+strict = false
+warn_unused_ignores = true
+warn_return_any = false
+
+[tool.pytest.ini_options]
+addopts = "--cov=doc_qual --cov=validation --cov-report=term-missing"
+testpaths = ["tests"]

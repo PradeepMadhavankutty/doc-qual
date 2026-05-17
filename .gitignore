@@ -1,0 +1,61 @@
+# ── Python ────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+.env
+.env.*
+
+# ── Testing & Coverage ────────────────────────────────────────────────────
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── Jupyter ───────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── IDE & OS ──────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ── Logs & Temp ───────────────────────────────────────────────────────────
+*.log
+tmp/
+temp/
+
+# ── Secrets ───────────────────────────────────────────────────────────────
+secrets/
+*.pem
+*.key
+credentials.json
+
+# ── AI/ML Artifacts ───────────────────────────────────────────────────────
+models/
+checkpoints/
+tensorboard/
+wandb/
+mlruns/
+
+# ── Validation Pipeline Outputs (generated, not committed) ────────────────
+# Note: capital-V Validation/ is the runtime output dir; lowercase validation/ is source code.
+# On case-insensitive filesystems (macOS) we match by extension/subdir name instead.
+Validation/dataset/*.png
+Validation/dataset/*.json
+Validation/dataset/*.csv
+Validation/Quality_Index/
+Validation/OCR_Output/
+Validation/Ground_Truth_Analysis/
+Validation/Hypothesis_Testing/
+Validation/Research_Artifacts/
+Validation/Plots/
+Validation/Paper_Assets/
+Validation/reports/validation_report.md
