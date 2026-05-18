@@ -15,13 +15,17 @@ It computes a 0-100 OCR readiness score from interpretable image features:
 
 ## Installation
 
+Install directly from GitHub (PyPI release coming soon):
+
 ```bash
-pip install Doc-Qual
+pip install git+https://github.com/PradeepMadhavankutty/doc-qual.git
 ```
 
 For development:
 
 ```bash
+git clone https://github.com/PradeepMadhavankutty/doc-qual.git
+cd doc-qual
 pip install -e ".[dev]"
 ```
 

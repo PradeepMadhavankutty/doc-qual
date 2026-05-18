@@ -10,7 +10,7 @@ readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.9"
 authors = [
-  { name = "Pradeep Madhavankutty", email = "pradeep@example.com" }
+  { name = "Pradeep Madhavankutty", email = "pradeep.madhavankutty@gmail.com" }
 ]
 keywords = ["ocr", "image-quality", "document", "preprocessing", "computer-vision"]
 classifiers = [
@@ -60,9 +60,9 @@ doc-qual = "doc_qual.cli:main"
 doc-qual-validate = "scripts.run_validation:main"
 
 [project.urls]
-Homepage = "https://github.com/PradeepMadhavankutty/Doc-Qual"
-Repository = "https://github.com/PradeepMadhavankutty/Doc-Qual"
-Issues = "https://github.com/PradeepMadhavankutty/Doc-Qual/issues"
+Homepage = "https://github.com/PradeepMadhavankutty/doc-qual"
+Repository = "https://github.com/PradeepMadhavankutty/doc-qual"
+Issues = "https://github.com/PradeepMadhavankutty/doc-qual/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["doc_qual", "validation"]
