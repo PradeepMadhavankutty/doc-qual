@@ -1,0 +1,14 @@
+{
+  "_comment": "Azure AI Vision (Read API) auto-corrects skew internally; bleed-through and shadow are its main failure modes.",
+  "sharpness": 0.20,
+  "noise": 0.14,
+  "edges": 0.13,
+  "skew": 0.06,
+  "brightness": 0.12,
+  "ridges": 0.07,
+  "ink_bleedthrough": 0.10,
+  "shadow_gradient": 0.09,
+  "local_contrast": 0.07,
+  "crinkle_fold": 0.01,
+  "brisque": 0.01
+}

@@ -1,0 +1,14 @@
+{
+  "_comment": "Tesseract 5 is highly sensitive to blur and skew; noise and low contrast also hurt significantly.",
+  "sharpness": 0.28,
+  "noise": 0.20,
+  "edges": 0.15,
+  "skew": 0.18,
+  "brightness": 0.07,
+  "ridges": 0.04,
+  "ink_bleedthrough": 0.02,
+  "shadow_gradient": 0.02,
+  "local_contrast": 0.02,
+  "crinkle_fold": 0.01,
+  "brisque": 0.01
+}

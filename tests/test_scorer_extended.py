@@ -25,6 +25,8 @@ def test_custom_weights_applied() -> None:
 
 def test_zero_weights_raises() -> None:
     img = make_clean_doc()
+    # Zero out every feature (including the new v0.2.0 features) so that
+    # total_weight == 0 and the scorer raises ValueError.
     zero_weights = {
         "sharpness": 0.0,
         "noise": 0.0,
@@ -32,6 +34,11 @@ def test_zero_weights_raises() -> None:
         "skew": 0.0,
         "brightness": 0.0,
         "ridges": 0.0,
+        "ink_bleedthrough": 0.0,
+        "shadow_gradient": 0.0,
+        "local_contrast": 0.0,
+        "crinkle_fold": 0.0,
+        "brisque": 0.0,
     }
     with pytest.raises(ValueError, match="At least one feature weight"):
         compute_doc_qual_score(img, weights=zero_weights, verbose=False)

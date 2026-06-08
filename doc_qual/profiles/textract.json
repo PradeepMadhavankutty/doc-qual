@@ -1,0 +1,14 @@
+{
+  "_comment": "AWS Textract is robust to moderate blur and skew but fails on low contrast and bleed-through.",
+  "sharpness": 0.18,
+  "noise": 0.14,
+  "edges": 0.14,
+  "skew": 0.10,
+  "brightness": 0.12,
+  "ridges": 0.08,
+  "ink_bleedthrough": 0.08,
+  "shadow_gradient": 0.07,
+  "local_contrast": 0.07,
+  "crinkle_fold": 0.01,
+  "brisque": 0.01
+}

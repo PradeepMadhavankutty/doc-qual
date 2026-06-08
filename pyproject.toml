@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "Doc-Qual"
-version = "0.1.0"
+version = "0.2.0"
 description = "Image quality scoring for OCR readiness"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -14,7 +14,7 @@ authors = [
 ]
 keywords = ["ocr", "image-quality", "document", "preprocessing", "computer-vision"]
 classifiers = [
-  "Development Status :: 3 - Alpha",
+  "Development Status :: 4 - Beta",
   "Intended Audience :: Developers",
   "Intended Audience :: Science/Research",
   "License :: OSI Approved :: MIT License",
@@ -54,6 +54,15 @@ validation-tesseract = [
 validation-easyocr = [
   "easyocr",
 ]
+calibration = [
+  "scipy>=1.7",
+]
+pdf = [
+  "pypdfium2>=4.0",
+]
+pdf-poppler = [
+  "pdf2image>=1.14",
+]
 
 [project.scripts]
 doc-qual = "doc_qual.cli:main"
@@ -66,6 +75,7 @@ Issues = "https://github.com/PradeepMadhavankutty/doc-qual/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["doc_qual", "validation"]
+include = ["doc_qual/profiles/*.json"]
 
 [tool.ruff]
 line-length = 88
@@ -76,6 +86,17 @@ select = ["E", "F", "I", "UP", "B"]
 
 [tool.ruff.lint.per-file-ignores]
 "validation/reports/artifacts.py" = ["E501"]
+"doc_qual/calibration.py" = ["E501"]
+"doc_qual/cli.py" = ["E501"]
+"doc_qual/features/brisque_like.py" = ["E501"]
+"doc_qual/features/local_contrast.py" = ["E501"]
+"doc_qual/features/shadow_gradient.py" = ["E501"]
+"doc_qual/features/text_crops.py" = ["E501"]
+"doc_qual/grid.py" = ["E501"]
+"doc_qual/scorer.py" = ["E501"]
+"tests/test_calibration.py" = ["E501"]
+"tests/test_features_v2.py" = ["E501"]
+"tests/test_pdf.py" = ["E501"]
 
 [tool.isort]
 profile = "black"

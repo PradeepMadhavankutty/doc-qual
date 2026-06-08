@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Any
 
 
 @dataclass(frozen=True)
@@ -17,6 +18,14 @@ class OCRQualityResult:
         raw_features: Raw feature measurements before normalization.
         weights: Weights used in the composite score.
         recommendations: Practical suggestions for improving the image.
+        crop_analysis: Per-document summary of text-crop detection used by
+            the crop-aware blur and edge features.  Keys include
+            ``crop_count``, ``valid_crop_count``, ``fallback_used``,
+            ``document_blur_score``, ``document_edge_score`` and the per-crop
+            ``crop_metrics`` list.  Empty when crop analysis was not run
+            (e.g. when ``OCRQualityResult`` is constructed directly).
+        engine: OCR engine profile used during scoring, or ``None`` for the
+            default weight profile.
     """
 
     ocr_score: float
@@ -26,14 +35,16 @@ class OCRQualityResult:
     raw_features: dict[str, float] = field(default_factory=dict)
     weights: dict[str, float] = field(default_factory=dict)
     recommendations: list[str] = field(default_factory=list)
+    crop_analysis: dict[str, Any] = field(default_factory=dict)
+    engine: str | None = None
 
     def to_dict(self) -> dict[str, object]:
         """Return a JSON-serializable representation."""
-
         return {
             "ocr_score": round(self.ocr_score, 2),
             "passed": self.passed,
             "threshold": self.threshold,
+            "engine": self.engine,
             "feature_scores": {
                 key: round(value, 2) for key, value in self.feature_scores.items()
             },
@@ -42,4 +53,5 @@ class OCRQualityResult:
             },
             "weights": self.weights,
             "recommendations": self.recommendations,
+            "crop_analysis": self.crop_analysis,
         }
