@@ -82,7 +82,7 @@ def _cmd_score(args: argparse.Namespace) -> int:
 def _cmd_calibrate(args: argparse.Namespace) -> int:
     """Score an image against a ground-truth file and log the CER."""
     from doc_qual.accuracy.metrics import (
-        compute_accuracy,  # type: ignore[import-not-found]
+        compute_accuracy,
     )
     from doc_qual.calibration import append_calibration_row, calibration_summary
     from doc_qual.scorer import compute_doc_qual_score
@@ -179,7 +179,7 @@ def _cmd_cal_summary(args: argparse.Namespace) -> int:
 # ── text formatters ───────────────────────────────────────────────────────────
 
 
-def _print_grid_text(grid_result: object, threshold: float) -> None:  # type: ignore[type-arg]
+def _print_grid_text(grid_result: object, threshold: float) -> None:
     from doc_qual.grid import GridResult
 
     if not isinstance(grid_result, GridResult):
@@ -199,7 +199,7 @@ def _print_grid_text(grid_result: object, threshold: float) -> None:  # type: ig
         print(f"    {line}")
 
 
-def _print_pdf_text(pdf_result: object) -> None:  # type: ignore[type-arg]
+def _print_pdf_text(pdf_result: object) -> None:
     from doc_qual.pdf import PDFQualityResult
 
     if not isinstance(pdf_result, PDFQualityResult):

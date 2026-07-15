@@ -134,7 +134,7 @@ def brisque_like_features(
     # Average pair α deviation from 2.0 — pairwise GGD should also be ≈ 2
     pair_alpha_vals = list(pair_alphas.values())
     pair_score = 100.0 - min(
-        100.0, np.mean([abs(a - 2.0) for a in pair_alpha_vals]) * 35.0
+        100.0, float(np.mean([abs(a - 2.0) for a in pair_alpha_vals])) * 35.0
     )
 
     score = float(0.4 * alpha_score + 0.35 * sigma_score + 0.25 * pair_score)

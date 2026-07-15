@@ -28,7 +28,6 @@ from doc_qual.features.shadow_gradient import shadow_gradient_features
 from doc_qual.features.skew import skew_features
 from doc_qual.scorer import compute_doc_qual_score
 
-
 # ---------------------------------------------------------------------------
 # Helpers to build synthetic document images
 # ---------------------------------------------------------------------------

@@ -98,7 +98,7 @@ def _render_pages_pypdfium2(
     dpi: int,
     max_pages: int | None,
 ) -> Generator[tuple[int, np.ndarray], None, None]:
-    import pypdfium2  # type: ignore[import-untyped]
+    import pypdfium2
 
     doc = pypdfium2.PdfDocument(str(pdf_path))
     scale = dpi / 72.0  # pypdfium2 renders at 72 DPI by default
@@ -117,7 +117,7 @@ def _render_pages_pdf2image(
     dpi: int,
     max_pages: int | None,
 ) -> Generator[tuple[int, np.ndarray], None, None]:
-    from pdf2image import convert_from_path  # type: ignore[import-untyped]
+    from pdf2image import convert_from_path
 
     kwargs: dict[str, Any] = {"dpi": dpi, "grayscale": True}
     if max_pages is not None:

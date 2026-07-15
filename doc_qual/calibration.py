@@ -206,7 +206,7 @@ def fit_weights_from_calibration(
 
     # Fit with NNLS (preferred) or lstsq fallback
     try:
-        from scipy.optimize import nnls  # type: ignore[import-untyped]
+        from scipy.optimize import nnls
 
         weights_raw, _ = nnls(X, y)
     except ImportError:
