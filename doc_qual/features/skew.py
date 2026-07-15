@@ -24,8 +24,8 @@ def skew_features(gray: np.ndarray) -> tuple[dict[str, float], dict[str, float]]
         return {"skew_angle": 0.0}, {"skew": 80.0}
 
     angles: list[float] = []
-    for line in lines[:, 0]:
-        x1, y1, x2, y2 = [int(v) for v in line]
+    for row in lines.reshape(-1, 4):
+        x1, y1, x2, y2 = int(row[0]), int(row[1]), int(row[2]), int(row[3])
         dx = x2 - x1
         dy = y2 - y1
         if dx == 0:
