@@ -79,10 +79,13 @@ def _add_bleedthrough(img: np.ndarray, bleed_value: int) -> np.ndarray:
     top = max(1, int(h * 0.12))
     bot = max(1, int(h * 0.12))
     lr = max(1, int(w * 0.08))
-    out[:top, :] = np.clip(out[:top, :].astype(int) - bleed_value, 0, 255).astype(np.uint8)
-    out[h - bot :, :] = np.clip(out[h - bot :, :].astype(int) - bleed_value, 0, 255).astype(np.uint8)
-    out[:, :lr] = np.clip(out[:, :lr].astype(int) - bleed_value, 0, 255).astype(np.uint8)
-    out[:, w - lr :] = np.clip(out[:, w - lr :].astype(int) - bleed_value, 0, 255).astype(np.uint8)
+    def _darken_band(band: np.ndarray) -> np.ndarray:
+        return np.clip(band.astype(int) - bleed_value, 0, 255).astype(np.uint8)
+
+    out[:top, :] = _darken_band(out[:top, :])
+    out[h - bot :, :] = _darken_band(out[h - bot :, :])
+    out[:, :lr] = _darken_band(out[:, :lr])
+    out[:, w - lr :] = _darken_band(out[:, w - lr :])
     return out
 
 
@@ -256,7 +259,8 @@ def test_shadow_gradient_score_decreases_with_shadow() -> None:
         scores.append(norm["shadow_gradient"])
 
     assert scores[0] > scores[-1], (
-        f"Uniform lighting ({scores[0]:.1f}) must outscore severe shadow ({scores[-1]:.1f})"
+        f"Uniform lighting ({scores[0]:.1f}) must outscore "
+        f"severe shadow ({scores[-1]:.1f})"
     )
 
 
