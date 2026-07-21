@@ -77,6 +77,10 @@ Issues = "https://github.com/PradeepMadhavankutty/doc-qual/issues"
 packages = ["doc_qual", "validation"]
 include = ["doc_qual/profiles/*.json"]
 
+[tool.black]
+line-length = 88
+target-version = ["py39", "py310", "py311", "py312"]
+
 [tool.ruff]
 line-length = 88
 target-version = "py39"
