@@ -79,6 +79,7 @@ def _add_bleedthrough(img: np.ndarray, bleed_value: int) -> np.ndarray:
     top = max(1, int(h * 0.12))
     bot = max(1, int(h * 0.12))
     lr = max(1, int(w * 0.08))
+
     def _darken_band(band: np.ndarray) -> np.ndarray:
         return np.clip(band.astype(int) - bleed_value, 0, 255).astype(np.uint8)
 
@@ -216,9 +217,9 @@ def test_edge_score_clean_text_above_blank() -> None:
     blank = np.full_like(text_doc, 240)
     _, norm_text = edge_features(text_doc)
     _, norm_blank = edge_features(blank)
-    assert norm_text["edges"] > norm_blank["edges"], (
-        f"Text ({norm_text['edges']:.1f}) vs blank ({norm_blank['edges']:.1f})"
-    )
+    assert (
+        norm_text["edges"] > norm_blank["edges"]
+    ), f"Text ({norm_text['edges']:.1f}) vs blank ({norm_blank['edges']:.1f})"
 
 
 def test_edge_score_is_non_negative() -> None:
@@ -240,9 +241,9 @@ def test_bleedthrough_score_decreases_with_bleed() -> None:
         _, norm = ink_bleedthrough_features(img)
         scores.append(norm["ink_bleedthrough"])
 
-    assert scores[0] > scores[-1], (
-        f"Clean ({scores[0]:.1f}) must outscore severe bleed ({scores[-1]:.1f})"
-    )
+    assert (
+        scores[0] > scores[-1]
+    ), f"Clean ({scores[0]:.1f}) must outscore severe bleed ({scores[-1]:.1f})"
 
 
 # ---------------------------------------------------------------------------
@@ -277,9 +278,9 @@ def test_local_contrast_decreases_with_lower_contrast() -> None:
         _, norm = local_contrast_features(img)
         scores.append(norm["local_contrast"])
 
-    assert scores[0] > scores[-1], (
-        f"High contrast ({scores[0]:.1f}) must outscore washed-out ({scores[-1]:.1f})"
-    )
+    assert (
+        scores[0] > scores[-1]
+    ), f"High contrast ({scores[0]:.1f}) must outscore washed-out ({scores[-1]:.1f})"
     for i in range(len(scores) - 1):
         assert scores[i] >= scores[i + 1] - 2.0, (
             f"Contrast score increased as contrast reduced: "
@@ -367,14 +368,14 @@ def test_score_in_range(extractor, key) -> None:
         _clean_doc(),
         _apply_blur(_clean_doc(), 31),
         _apply_noise(_clean_doc(), 30),
-        np.full((200, 200), 30, dtype=np.uint8),   # very dark
+        np.full((200, 200), 30, dtype=np.uint8),  # very dark
         np.full((200, 200), 240, dtype=np.uint8),  # blank white
     ]:
         _, norm = extractor(img)
         score = norm[key]
-        assert 0.0 <= score <= 100.0, (
-            f"{extractor.__name__} returned {key}={score:.2f} outside [0, 100]"
-        )
+        assert (
+            0.0 <= score <= 100.0
+        ), f"{extractor.__name__} returned {key}={score:.2f} outside [0, 100]"
 
 
 # ---------------------------------------------------------------------------
@@ -429,9 +430,9 @@ def test_all_feature_scores_positive_orientation() -> None:
     """Confirm every key in feature_scores follows higher=better convention."""
     result = compute_doc_qual_score(_clean_doc(), verbose=False)
     for name, score in result.feature_scores.items():
-        assert 0.0 <= score <= 100.0, (
-            f"Feature '{name}' score={score:.2f} violates [0,100] contract"
-        )
+        assert (
+            0.0 <= score <= 100.0
+        ), f"Feature '{name}' score={score:.2f} violates [0,100] contract"
     # Clean doc must score above 50 on most features — no inverted outliers
     above_50 = sum(1 for s in result.feature_scores.values() if s >= 50)
     total = len(result.feature_scores)
